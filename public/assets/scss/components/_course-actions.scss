@@ -1,0 +1,36 @@
+// Styles for edit and delete buttons on course cards (admin only)
+
+.course-card {
+  position: relative;
+
+  .course-actions {
+    position: absolute;
+    top: map-get($spacers, 3);
+    right: map-get($spacers, 3);
+    display: flex;
+    gap: map-get($spacers, 2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+
+    button {
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: $white;
+      padding: map-get($spacers, 1) map-get($spacers, 2);
+      border-radius: $border-radius-sm;
+      font-size: $font-size-sm;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background: $danger-color;
+      }
+    }
+  }
+
+  &.admin-hover:hover .course-actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

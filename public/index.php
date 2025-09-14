@@ -8,37 +8,39 @@ $userRepo = new UserRepository($pdo);
 
 $authService = new AuthService($userRepo);
 
+
 $authMiddleware = new AuthMiddleware($authService);
 
-$homeController = new HomeController($authService);
+require_once __DIR__ . '/../app/Route.php';
+
+$courseRepo = new CourseRepository($pdo);
+$courseService = new CourseService($courseRepo);
+$courseController = new CourseController($courseService);
+
+$homeController = new HomeController($authService, $courseService);
 $authController = new AuthController($authService);
 
-$requestUri = $_SERVER['REQUEST_URI'];
-$path = parse_url($requestUri, PHP_URL_PATH);
+$router = new Router();
 
-switch ($path) {
-    case '/':
-        $homeController->index();
-        break;
-    case '/login':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $authController->login();
-        } else {
-            $authController->showLogin();
-        }
-        break;
-    case '/register':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $authController->register();
-        } else {
-            $authController->showRegister();
-        }
-        break;
-    case '/logout':
-        $authController->logout();
-        break;
-    default:
-        http_response_code(404);
-        echo 'Página não encontrada';
-        break;
-}
+// Home route
+$router->add('GET', '/', [$homeController, 'index']);
+
+// Auth routes
+$router->add('GET', '/login', [$authController, 'showLogin']);
+$router->add('POST', '/login', [$authController, 'login']);
+$router->add('GET', '/register', [$authController, 'showRegister']);
+$router->add('POST', '/register', [$authController, 'register']);
+$router->add('GET', '/logout', [$authController, 'logout']);
+
+// Course routes (API)
+$router->add('GET', '/courses', [$courseController, 'index']);
+$router->add('GET', '/courses/{id}', [$courseController, 'show']);
+$router->add('POST', '/courses', [$courseController, 'store']);
+$router->add('POST', '/courses/{id}', [$courseController, 'update']);
+$router->add('DELETE', '/courses/{id}', [$courseController, 'destroy']);
+
+// Dispatch the request
+$method = $_SERVER['REQUEST_METHOD'];
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+$router->dispatch($method, $uri);

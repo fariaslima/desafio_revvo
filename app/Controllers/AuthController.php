@@ -11,6 +11,7 @@ class AuthController
 
     public function showLogin(): void
     {
+        $user = $this->authService->getCurrentUser();
         include __DIR__ . '/../Views/login.php';
     }
 
@@ -35,6 +36,7 @@ class AuthController
             exit;
         } else {
             $error = 'Invalid credentials';
+            $user = $this->authService->getCurrentUser();
             include __DIR__ . '/../Views/login.php';
         }
     }

@@ -1,0 +1,227 @@
+// ===== HERO COMPONENT =====
+
+.hero {
+  position: relative;
+  height: 60vh;
+  min-height: 400px;
+  overflow: hidden;
+  
+  @include media-breakpoint-down(md) {
+    height: 50vh;
+    min-height: 350px;
+  }
+  
+  @include media-breakpoint-down(sm) {
+    height: 40vh;
+    min-height: 300px;
+  }
+}
+
+// Carousel Container
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+// Slides
+.slide {
+  @include position-cover();
+  opacity: 0;
+  transition: opacity $transition-slow;
+  
+  &.active {
+    opacity: 1;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Slide Overlay
+.slide-overlay {
+  @include position-cover();
+  background: linear-gradient(135deg, rgba($black, 0.7) 0%, rgba($black, 0.3) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 5%;
+  
+  @include media-breakpoint-down(md) {
+    padding: 0 3%;
+  }
+}
+
+// Slide Content
+.slide-content {
+  max-width: 500px;
+  color: $white;
+  
+  @include media-breakpoint-down(sm) {
+    max-width: 90%;
+  }
+  
+  h2 {
+    font-size: 3rem;
+    font-weight: $font-weight-bold;
+    margin-bottom: map-get($spacers, 4);
+    letter-spacing: -0.02em;
+    
+    @include media-breakpoint-down(md) {
+      font-size: 2.5rem;
+    }
+    
+    @include media-breakpoint-down(sm) {
+      font-size: 2rem;
+      margin-bottom: map-get($spacers, 3);
+    }
+    
+    @include media-breakpoint-down(xs) {
+      font-size: 1.75rem;
+    }
+  }
+  
+  p {
+    font-size: $font-size-lg;
+    line-height: $line-height-base;
+    margin-bottom: map-get($spacers, 5);
+    opacity: 0.9;
+    
+    @include media-breakpoint-down(md) {
+      font-size: $font-size-base;
+    }
+    
+    @include media-breakpoint-down(sm) {
+      font-size: $font-size-sm;
+      margin-bottom: map-get($spacers, 4);
+    }
+  }
+}
+
+// CTA Button
+.cta-button {
+  @include button-variant(transparent, $white, rgba($white, 0.1));
+  border: 2px solid $white;
+  padding: map-get($spacers, 3) map-get($spacers, 5);
+  border-radius: $border-radius-xl;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    background: $white;
+    color: $dark-color;
+    transform: translateY(-2px);
+  }
+  
+  @include media-breakpoint-down(sm) {
+    padding: map-get($spacers, 2) map-get($spacers, 4);
+    font-size: 0.8rem;
+  }
+}
+
+// Carousel Controls
+.carousel-btn {
+  @include position-center();
+  background: rgba($white, 0.2);
+  color: $white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: $font-size-lg;
+  transition: all $transition-base;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  
+  &:hover {
+    background: rgba($white, 0.3);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  
+  &:focus {
+    outline: 2px solid $white;
+    outline-offset: 2px;
+  }
+  
+  @include media-breakpoint-down(md) {
+    width: 40px;
+    height: 40px;
+    font-size: $font-size-base;
+  }
+  
+  @include media-breakpoint-down(sm) {
+    width: 35px;
+    height: 35px;
+    font-size: $font-size-sm;
+  }
+}
+
+.carousel-btn.prev {
+  left: map-get($spacers, 5);
+  transform: translate(-50%, -50%);
+  
+  @include media-breakpoint-down(md) {
+    left: map-get($spacers, 4);
+  }
+}
+
+.carousel-btn.next {
+  right: map-get($spacers, 5);
+  left: auto;
+  transform: translate(50%, -50%);
+  
+  @include media-breakpoint-down(md) {
+    right: map-get($spacers, 4);
+  }
+}
+
+// Carousel Indicators
+.carousel-indicators {
+  position: absolute;
+  bottom: map-get($spacers, 5);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: map-get($spacers, 2);
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba($white, 0.5);
+  border: none;
+  transition: all $transition-base;
+  cursor: pointer;
+  
+  &.active {
+    background: $white;
+    transform: scale(1.2);
+  }
+  
+  &:hover {
+    background: rgba($white, 0.8);
+  }
+  
+  &:focus {
+    outline: 2px solid $white;
+    outline-offset: 2px;
+  }
+}
+
+// Animation for slide content
+.slide.active .slide-content {
+  @include slide-in-left();
+}

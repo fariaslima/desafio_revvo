@@ -1,0 +1,160 @@
+// ===== HEADER COMPONENT =====
+
+.header {
+  background: $white;
+  box-shadow: $shadow;
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+}
+
+.header-content {
+  @include flex-between();
+  padding: map-get($spacers, 4) 0;
+  gap: map-get($spacers, 5);
+  
+  @include media-breakpoint-down(md) {
+    flex-wrap: wrap;
+    gap: map-get($spacers, 4);
+  }
+}
+
+// Logo
+.logo {
+  h1 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $dark-color;
+    letter-spacing: -0.02em;
+    margin-bottom: 0;
+    
+    @include media-breakpoint-down(sm) {
+      font-size: $font-size-2xl;
+    }
+  }
+}
+
+// Search Bar
+.search-bar {
+  flex: 1;
+  max-width: 400px;
+  display: flex;
+  position: relative;
+  
+  @include media-breakpoint-down(md) {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+  
+  input {
+    @include input-base();
+    padding-right: 3rem;
+    
+    &:focus {
+      border-color: $primary-color;
+    }
+  }
+  
+  button {
+    position: absolute;
+    right: map-get($spacers, 2);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    color: $gray-medium;
+    padding: map-get($spacers, 2);
+    border-radius: 50%;
+    transition: color $transition-base;
+    
+    &:hover {
+      color: $primary-color;
+    }
+    
+    &:focus {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// User Profile
+.user-profile {
+  @include flex-center();
+  gap: map-get($spacers, 3);
+  cursor: pointer;
+  padding: map-get($spacers, 2);
+  border-radius: $border-radius-xl;
+  transition: background-color $transition-base;
+  position: relative;
+  
+  &:hover {
+    background-color: $gray-lightest;
+  }
+  
+  &:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info {
+  @include flex-center();
+  gap: map-get($spacers, 2);
+  
+  @include media-breakpoint-down(sm) {
+    .user-name {
+      display: none;
+    }
+  }
+}
+
+.user-name {
+  font-weight: $font-weight-medium;
+  color: $dark-color;
+}
+
+// User Dropdown (Dynamic)
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: $white;
+  border: 1px solid $gray-lighter;
+  border-radius: $border-radius;
+  box-shadow: $shadow-lg;
+  z-index: $z-index-dropdown;
+  min-width: 150px;
+  margin-top: map-get($spacers, 2);
+  overflow: hidden;
+  
+  .user-menu-item {
+    padding: map-get($spacers, 3) map-get($spacers, 4);
+    cursor: pointer;
+    transition: background-color $transition-fast;
+    border-bottom: 1px solid lighten($gray-lighter, 5%);
+    font-size: $font-size-sm;
+    
+    &:hover {
+      background-color: $gray-lightest;
+    }
+    
+    &:last-child {
+      border-bottom: none;
+      color: $danger-color;
+      font-weight: $font-weight-medium;
+    }
+    
+    &:focus {
+      outline: 2px solid $primary-color;
+      outline-offset: -2px;
+    }
+  }
+}

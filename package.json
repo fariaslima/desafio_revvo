@@ -1,0 +1,15 @@
+{
+  "name": "leo-platform",
+  "version": "1.0.0",
+  "description": "LEO Platform SCSS compilation setup",
+  "scripts": {
+    "scss": "sass --watch public/assets/scss/main.scss public/assets/css/style.css"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^6.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "sass": "^1.92.1"
+  }
+}
