@@ -150,6 +150,47 @@
   min-height: 100px;
 }
 
+.modal-form input[type="file"] {
+  padding: map-get($spacers, 3);
+  border: 1px solid $gray-light;
+  border-radius: $border-radius;
+  font-size: $font-size-base;
+  font-family: $font-family-primary;
+  margin-bottom: map-get($spacers, 5);
+  transition: border-color $transition-base;
+  
+  display: block;
+  background-color: $gray-lightest;
+  cursor: pointer;
+  
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+
+  &::-webkit-file-upload-button {
+    background-color: $primary-color;
+    color: $white;
+    padding: map-get($spacers, 2) map-get($spacers, 4);
+    border: none;
+    border-radius: $border-radius;
+    text-transform: uppercase;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .modal-form input[type="file"] {
+    width: 100%;
+  }
+}
+
 .form-error {
   color: $danger-color;
   font-weight: $font-weight-semibold;
@@ -257,7 +298,6 @@
   }
 }
 
-// Add Course Card
 .add-course-card {
   @include card();
   @include flex-center();
@@ -311,7 +351,6 @@
   }
 }
 
-// Course Card Loading State
 .course-card.loading {
   .course-image,
   .course-content h3,

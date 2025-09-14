@@ -141,7 +141,6 @@ class LEOPlatform {
             form.courseId.value = course.id;
             form.title.value = course.title;
             form.description.value = course.description;
-            form.image.value = course.image || '';
             form.category.value = course.category || '';
         } else {
             modal.querySelector('#modal-title').textContent = 'Adicionar Curso';
@@ -378,7 +377,7 @@ class LEOPlatform {
         userMenu.innerHTML = `
             <div class="user-menu-item">Meu Perfil</div>
             <div class="user-menu-item">Configurações</div>
-            <div class="user-menu-item">Sair</div>
+            <div class="user-menu-item"><a href="/logout">Sair</a></div>
         `;
 
         Object.assign(userMenu.style, {

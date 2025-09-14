@@ -115,14 +115,23 @@ class CourseController
         try {
             $imageFilename = $this->handleImageUpload();
 
-            $data = [
-                'title' => $_POST['title'] ?? '',
-                'description' => $_POST['description'] ?? '',
-                'category' => $_POST['category'] ?? '',
-            ];
+            $data = [];
 
+            if (isset($_POST['title']) && $_POST['title'] !== '') {
+                $data['title'] = $_POST['title'];
+            }
+            if (isset($_POST['description']) && $_POST['description'] !== '') {
+                $data['description'] = $_POST['description'];
+            }
+            if (isset($_POST['category']) && $_POST['category'] !== '') {
+                $data['category'] = $_POST['category'];
+            }
             if ($imageFilename !== null) {
                 $data['image'] = $imageFilename;
+            }
+
+            if (empty($data)) {
+                throw new Exception('Nenhum dado para atualizar');
             }
 
             $success = $this->courseService->updateCourse($id, $data);

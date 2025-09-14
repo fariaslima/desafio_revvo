@@ -29,9 +29,6 @@ class CourseService
 
     public function updateCourse(int $id, array $data): bool
     {
-        if (empty($data['title']) || empty($data['description'])) {
-            throw new Exception('Title and description are required');
-        }
         return $this->courseRepository->update($id, $data);
     }
 
