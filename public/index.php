@@ -39,6 +39,20 @@ $router->add('POST', '/courses', [$courseController, 'store']);
 $router->add('POST', '/courses/{id}', [$courseController, 'update']);
 $router->add('DELETE', '/courses/{id}', [$courseController, 'destroy']);
 
+// Image serving route
+$router->add('GET', '/image/{filename}', function($filename) {
+    $filePath = __DIR__ . '/../storage/' . $filename;
+    if (file_exists($filePath) && is_file($filePath)) {
+        $mime = mime_content_type($filePath);
+        header('Content-Type: ' . $mime);
+        readfile($filePath);
+        exit;
+    } else {
+        http_response_code(404);
+        echo 'Image not found';
+    }
+});
+
 // Dispatch the request
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

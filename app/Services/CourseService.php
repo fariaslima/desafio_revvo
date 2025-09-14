@@ -21,16 +21,16 @@ class CourseService
 
     public function createCourse(array $data): Course
     {
-        if (empty($data['title']) || empty($data['description']) || empty($data['category'])) {
-            throw new Exception('Title, description, and category are required');
+        if (empty($data['title']) || empty($data['description'])) {
+            throw new Exception('Title and description are required');
         }
         return $this->courseRepository->create($data);
     }
 
     public function updateCourse(int $id, array $data): bool
     {
-        if (empty($data['title']) || empty($data['description']) || empty($data['category'])) {
-            throw new Exception('Title, description, and category are required');
+        if (empty($data['title']) || empty($data['description'])) {
+            throw new Exception('Title and description are required');
         }
         return $this->courseRepository->update($id, $data);
     }

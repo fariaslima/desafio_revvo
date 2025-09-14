@@ -53,7 +53,7 @@ class LEOPlatform {
 
             article.innerHTML = `
                 <div class="course-image">
-                    <img src="${course.image || 'https://placehold.co/300x200?text='+course.title}" alt="${course.title}" />
+                    <img src="${course.image ? '/image/' + course.image : 'https://placehold.co/300x200?text='+course.title}" alt="${course.title}" />
                 </div>
                 <div class="course-content">
                     <h3>${course.title}</h3>
@@ -264,21 +264,14 @@ class LEOPlatform {
         const form = modal.querySelector('#course-form');
         const courseId = form.courseId.value;
         const url = courseId ? `/courses/${courseId}` : '/courses';
-        const method = courseId ? 'POST' : 'POST';
+        const method = 'POST';
 
         const formData = new FormData(form);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
 
         try {
             const response = await fetch(url, {
                 method: method,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams(data),
+                body: formData,
             });
 
             if (!response.ok) {
@@ -286,7 +279,6 @@ class LEOPlatform {
                 throw new Error(errorData.error || 'Erro ao salvar curso');
             }
 
-            const courseId = form.courseId.value;
             const message = courseId ? 'Curso editado com sucesso!' : 'Curso adicionado com sucesso!';
             form.querySelector('.form-error').textContent = message;
             form.querySelector('.form-error').style.color = 'green';
@@ -296,6 +288,7 @@ class LEOPlatform {
             }, 2000);
         } catch (error) {
             form.querySelector('.form-error').textContent = error.message;
+            form.querySelector('.form-error').style.color = 'red';
         }
     }
 

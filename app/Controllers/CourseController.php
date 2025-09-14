@@ -38,6 +38,45 @@ class CourseController
         echo json_encode($course->toArray());
     }
 
+    private function handleImageUpload(): ?string
+    {
+        if (!isset($_FILES['image']) || $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
+            return null;
+        }
+
+        $file = $_FILES['image'];
+
+        // Validate file size (max 1MB)
+        if ($file['size'] > 1024 * 1024) {
+            throw new Exception('A imagem deve ter no máximo 1MB.');
+        }
+
+        // Validate file type
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+        if (!in_array($file['type'], $allowedTypes)) {
+            throw new Exception('Tipo de imagem inválido. Permitidos: jpg, jpeg, png, webp.');
+        }
+
+        // Validate image dimensions
+        $imageInfo = getimagesize($file['tmp_name']);
+        if ($imageInfo === false) {
+            throw new Exception('Arquivo não é uma imagem válida.');
+        }
+        // Dimension validation removed as per user request
+
+        // Generate unique filename
+        $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $filename = uniqid('course_', true) . '.' . $ext;
+
+        $destination = __DIR__ . '/../../storage/' . $filename;
+
+        if (!move_uploaded_file($file['tmp_name'], $destination)) {
+            throw new Exception('Erro ao salvar a imagem.');
+        }
+
+        return $filename;
+    }
+
     public function store(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -46,14 +85,16 @@ class CourseController
             return;
         }
 
-        $data = [
-            'title' => $_POST['title'] ?? '',
-            'description' => $_POST['description'] ?? '',
-            'image' => $_POST['image'] ?? null,
-            'category' => $_POST['category'] ?? '',
-        ];
-
         try {
+            $imageFilename = $this->handleImageUpload();
+
+            $data = [
+                'title' => $_POST['title'] ?? '',
+                'description' => $_POST['description'] ?? '',
+                'image' => $imageFilename,
+                'category' => $_POST['category'] ?? '',
+            ];
+
             $course = $this->courseService->createCourse($data);
             http_response_code(201);
             echo json_encode($course->toArray());
@@ -71,14 +112,19 @@ class CourseController
             return;
         }
 
-        $data = [
-            'title' => $_POST['title'] ?? '',
-            'description' => $_POST['description'] ?? '',
-            'image' => $_POST['image'] ?? null,
-            'category' => $_POST['category'] ?? '',
-        ];
-
         try {
+            $imageFilename = $this->handleImageUpload();
+
+            $data = [
+                'title' => $_POST['title'] ?? '',
+                'description' => $_POST['description'] ?? '',
+                'category' => $_POST['category'] ?? '',
+            ];
+
+            if ($imageFilename !== null) {
+                $data['image'] = $imageFilename;
+            }
+
             $success = $this->courseService->updateCourse($id, $data);
             if ($success) {
                 echo json_encode(['message' => 'Course updated successfully']);
