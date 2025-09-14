@@ -148,7 +148,7 @@
     
     &:last-child {
       border-bottom: none;
-      color: $danger-color;
+      color: $danger-color !important;
       font-weight: $font-weight-medium;
     }
     

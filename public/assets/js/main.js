@@ -7,10 +7,17 @@ class LEOPlatform {
             modal.style.display = 'none';
         }
 
+        this.currentSlide = 0;
+        this.slides = document.querySelectorAll('.slide');
+        this.indicators = document.querySelectorAll('.indicator');
+        this.autoPlayInterval = null;
+        this.autoPlayDelay = 5000; // 5 segundos
+
         this.init();
     }
 
     async init() {
+        this.initCarousel();
         this.initSearch();
         this.initUserProfile();
         await this.fetchCourses();
@@ -34,6 +41,150 @@ class LEOPlatform {
                 coursesGrid.innerHTML = '<p>Erro ao carregar os cursos.</p>';
             }
         }
+    }
+
+    /**
+     * Inicializa o carousel principal
+     */
+    initCarousel() {
+        // Botões de navegação
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => this.prevSlide());
+            nextBtn.addEventListener('click', () => this.nextSlide());
+        }
+
+        // Indicadores
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => this.goToSlide(index));
+        });
+
+        // Navegação por teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') this.prevSlide();
+            if (e.key === 'ArrowRight') this.nextSlide();
+        });
+
+        // Pausa autoplay ao passar o mouse
+        const carousel = document.querySelector('.carousel');
+        if (carousel) {
+            carousel.addEventListener('mouseenter', () => this.stopAutoPlay());
+            carousel.addEventListener('mouseleave', () => this.startAutoPlay());
+        }
+
+        // Touch/Swipe support
+        this.initTouchSupport();
+    }
+
+    /**
+     * Adiciona suporte a touch/swipe para dispositivos móveis
+     */
+    initTouchSupport() {
+        const carousel = document.querySelector('.carousel');
+        if (!carousel) return;
+
+        let startX = 0;
+        let startY = 0;
+        let endX = 0;
+        let endY = 0;
+
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+
+        carousel.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            endY = e.changedTouches[0].clientY;
+            this.handleSwipe(startX, startY, endX, endY);
+        });
+    }
+
+    /**
+     * Processa gestos de swipe
+     */
+    handleSwipe(startX, startY, endX, endY) {
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        const minSwipeDistance = 50;
+
+        // Verifica se é um swipe horizontal
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+            if (deltaX > 0) {
+                this.prevSlide();
+            } else {
+                this.nextSlide();
+            }
+        }
+    }
+
+    /**
+     * Vai para o slide anterior
+     */
+    prevSlide() {
+        this.currentSlide = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
+        this.updateSlide();
+    }
+
+    /**
+     * Vai para o próximo slide
+     */
+    nextSlide() {
+        this.currentSlide = this.currentSlide === this.slides.length - 1 ? 0 : this.currentSlide + 1;
+        this.updateSlide();
+    }
+
+    /**
+     * Vai para um slide específico
+     */
+    goToSlide(index) {
+        this.currentSlide = index;
+        this.updateSlide();
+    }
+
+    /**
+     * Atualiza a exibição do slide
+     */
+    updateSlide() {
+        // Remove classe active de todos os slides
+        this.slides.forEach(slide => slide.classList.remove('active'));
+        this.indicators.forEach(indicator => indicator.classList.remove('active'));
+
+        // Adiciona classe active ao slide atual
+        this.slides[this.currentSlide].classList.add('active');
+        this.indicators[this.currentSlide].classList.add('active');
+
+        // Reinicia o autoplay
+        this.restartAutoPlay();
+    }
+
+    /**
+     * Inicia reprodução automática
+     */
+    startAutoPlay() {
+        this.autoPlayInterval = setInterval(() => {
+            this.nextSlide();
+        }, this.autoPlayDelay);
+    }
+
+    /**
+     * Para reprodução automática
+     */
+    stopAutoPlay() {
+        if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+        }
+    }
+
+    /**
+     * Reinicia reprodução automática
+     */
+    restartAutoPlay() {
+        this.stopAutoPlay();
+        this.startAutoPlay();
     }
 
     renderCourses(courses) {
@@ -385,7 +536,7 @@ class LEOPlatform {
         userMenu.innerHTML = `
             <div class="user-menu-item">Meu Perfil</div>
             <div class="user-menu-item">Configurações</div>
-            <div class="user-menu-item">Sair</div>
+            <div class="user-menu-item"><a href="/logout">Sair</a</div>
         `;
 
         Object.assign(userMenu.style, {
