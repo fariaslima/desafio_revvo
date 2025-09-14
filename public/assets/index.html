@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEO - Plataforma de Cursos Online</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>L≡O</h1>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Pesquisar cursos..." aria-label="Pesquisar cursos">
+                    <button type="button" aria-label="Buscar">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40x40/4A90E2/FFFFFF?text=JD" alt="Avatar do usuário" class="avatar">
+                    <div class="user-info">
+                        <span class="user-name">John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section - Carousel -->
+        <section class="hero" aria-label="Destaques">
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="slide active">
+                        <div class="slide-overlay">
+                            <div class="slide-content">
+                                <h2>LOREM IPSUM</h2>
+                                <p>Aenean luctus mi bibendum mulla sed conmequtur. Cunt 
+                                sociis natoque penatibus et magnis dis parturient montes,
+                                nascetur ridiculus vere. Morbi leo risus, porta ac consectetur
+                                aluupo, vactus dum et odio.</p>
+                                <button class="cta-button">VER CURSO</button>
+                            </div>
+                        </div>
+                        <img src="https://via.placeholder.com/1200x400/4A90E2/FFFFFF?text=Slide+1" alt="Destaque do curso">
+                    </div>
+                    <div class="slide">
+                        <div class="slide-overlay">
+                            <div class="slide-content">
+                                <h2>SEGUNDO SLIDE</h2>
+                                <p>Conteúdo do segundo slide com informações sobre cursos
+                                e oportunidades de aprendizado na plataforma.</p>
+                                <button class="cta-button">VER CURSO</button>
+                            </div>
+                        </div>
+                        <img src="https://via.placeholder.com/1200x400/6C5CE7/FFFFFF?text=Slide+2" alt="Segundo destaque">
+                    </div>
+                    <div class="slide">
+                        <div class="slide-overlay">
+                            <div class="slide-content">
+                                <h2>TERCEIRO SLIDE</h2>
+                                <p>Mais informações sobre os cursos disponíveis e 
+                                como começar sua jornada de aprendizado.</p>
+                                <button class="cta-button">VER CURSO</button>
+                            </div>
+                        </div>
+                        <img src="https://via.placeholder.com/1200x400/FD79A8/FFFFFF?text=Slide+3" alt="Terceiro destaque">
+                    </div>
+                </div>
+                <button class="carousel-btn prev" aria-label="Slide anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next" aria-label="Próximo slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="carousel-indicators">
+                    <button class="indicator active" aria-label="Ir para slide 1"></button>
+                    <button class="indicator" aria-label="Ir para slide 2"></button>
+                    <button class="indicator" aria-label="Ir para slide 3"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section class="courses-section">
+            <div class="container">
+                <h2 class="section-title">MEUS CURSOS</h2>
+                <div class="courses-grid">
+                    <!-- Course Cards -->
+                    <article class="course-card">
+                        <div class="course-image">
+                            <img src="https://via.placeholder.com/300x200/74B9FF/FFFFFF?text=Curso+1" alt="Pellentesque Malesuada">
+                        </div>
+                        <div class="course-content">
+                            <h3>PELLENTESQUE MALESUADA</h3>
+                            <p>Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue.</p>
+                            <button class="course-btn">VER CURSO</button>
+                        </div>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-image">
+                            <img src="https://via.placeholder.com/300x200/00B894/FFFFFF?text=Curso+2" alt="Pellentesque Malesuada">
+                            <span class="course-badge new">NOVO</span>
+                        </div>
+                        <div class="course-content">
+                            <h3>PELLENTESQUE MALESUADA</h3>
+                            <p>Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue.</p>
+                            <button class="course-btn">VER CURSO</button>
+                        </div>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-image">
+                            <img src="https://via.placeholder.com/300x200/FDCB6E/FFFFFF?text=Curso+3" alt="Pellentesque Malesuada">
+                        </div>
+                        <div class="course-content">
+                            <h3>PELLENTESQUE MALESUADA</h3>
+                            <p>Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue.</p>
+                            <button class="course-btn">VER CURSO</button>
+                        </div>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-image">
+                            <img src="https://via.placeholder.com/300x200/E17055/FFFFFF?text=Curso+4" alt="Pellentesque Malesuada">
+                        </div>
+                        <div class="course-content">
+                            <h3>PELLENTESQUE MALESUADA</h3>
+                            <p>Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue.</p>
+                            <button class="course-btn">VER CURSO</button>
+                        </div>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-image">
+                            <img src="https://via.placeholder.com/300x200/A29BFE/FFFFFF?text=Curso+5" alt="Pellentesque Malesuada">
+                        </div>
+                        <div class="course-content">
+                            <h3>PELLENTESQUE MALESUADA</h3>
+                            <p>Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue.</p>
+                            <button class="course-btn">VER CURSO</button>
+                        </div>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-image">
+                            <img src="https://via.placeholder.com/300x200/81ECEC/FFFFFF?text=Curso+6" alt="Pellentesque Malesuada">
+                        </div>
+                        <div class="course-content">
+                            <h3>PELLENTESQUE MALESUADA</h3>
+                            <p>Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue.</p>
+                            <button class="course-btn">VER CURSO</button>
+                        </div>
+                    </article>
+
+                    <!-- Add Course Card -->
+                    <div class="add-course-card">
+                        <div class="add-course-content">
+                            <i class="fas fa-plus-circle"></i>
+                            <h3>ADICIONAR<br>CURSO</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>L≡O</h3>
+                    <p>Maecenas facilibus mollis interdum. Duis non risus poris sit eleifend ac, vestibulum ut orci.</p>
+                </div>
+                <div class="footer-contact">
+                    <h4>// CONTATO</h4>
+                    <p>(21) 99798-3434</p>
+                    <p>contato@leolearning.com</p>
+                </div>
+                <div class="footer-social">
+                    <h4>// REDES SOCIAIS</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright 2017 - All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

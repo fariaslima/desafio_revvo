@@ -1,0 +1,347 @@
+// ===== COURSES COMPONENT =====
+
+.courses-section {
+  padding: map-get($spacers, 8) 0;
+  background: $gray-lightest;
+  
+  @include media-breakpoint-down(md) {
+    padding: map-get($spacers, 7) 0;
+  }
+  
+  @include media-breakpoint-down(sm) {
+    padding: map-get($spacers, 5) 0;
+  }
+}
+
+.section-title {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  color: $dark-color;
+  margin-bottom: map-get($spacers, 7);
+  text-align: left;
+  letter-spacing: -0.02em;
+  
+  @include media-breakpoint-down(md) {
+    font-size: $font-size-2xl;
+    margin-bottom: map-get($spacers, 5);
+  }
+  
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-xl;
+    margin-bottom: map-get($spacers, 4);
+  }
+}
+
+// Courses Grid
+.courses-grid {
+  @include grid-auto-fit(300px, map-get($spacers, 5));
+  
+  @include media-breakpoint-down(lg) {
+    @include grid-auto-fit(280px, map-get($spacers, 4));
+  }
+  
+  @include media-breakpoint-down(md) {
+    @include grid-auto-fit(250px, map-get($spacers, 4));
+  }
+  
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: 1fr;
+    gap: map-get($spacers, 4);
+  }
+  
+  @include media-breakpoint-down(xs) {
+    gap: map-get($spacers, 3);
+  }
+}
+
+// Course Card
+.course-card {
+  @include card();
+  
+  @include media-breakpoint-down(sm) {
+    transform: none;
+    
+    &:hover {
+      transform: none;
+      box-shadow: $shadow-lg;
+    }
+  }
+}
+
+// Modal Form Styles
+.modal-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+
+.modal-content {
+  background: $white;
+  border-radius: $border-radius-lg;
+  padding: map-get($spacers, 8);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: $shadow-lg;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: map-get($spacers, 5);
+  padding-bottom: map-get($spacers, 3);
+  border-bottom: 1px solid $gray-lighter;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: $gray-medium;
+  transition: color $transition-base;
+  
+  &:hover {
+    color: $danger-color;
+  }
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-form label {
+  font-weight: $font-weight-semibold;
+  margin-bottom: map-get($spacers, 2);
+  color: $dark-color;
+}
+
+.modal-form input[type="text"],
+.modal-form input[type="email"],
+.modal-form input[type="password"],
+.modal-form input[type="url"],
+.modal-form textarea {
+  padding: map-get($spacers, 3);
+  border: 1px solid $gray-light;
+  border-radius: $border-radius;
+  font-size: $font-size-base;
+  font-family: $font-family-primary;
+  margin-bottom: map-get($spacers, 5);
+  transition: border-color $transition-base;
+  
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+}
+
+.modal-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-error {
+  color: $danger-color;
+  font-weight: $font-weight-semibold;
+  margin-bottom: map-get($spacers, 4);
+  min-height: 1.5rem;
+}
+
+.course-btn {
+  @include button-variant($secondary-color);
+  width: 100%;
+  padding: map-get($spacers, 3) map-get($spacers, 4);
+  border-radius: $border-radius;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    background: $success-color;
+  }
+}
+
+.course-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-base;
+  }
+}
+
+.course-card:hover .course-image img {
+  transform: scale(1.05);
+  
+  @include media-breakpoint-down(sm) {
+    transform: scale(1);
+  }
+}
+
+.course-badge {
+  position: absolute;
+  top: map-get($spacers, 4);
+  right: map-get($spacers, 4);
+  background: $secondary-color;
+  color: $white;
+  padding: map-get($spacers, 1) map-get($spacers, 3);
+  border-radius: $border-radius-lg;
+  font-size: 0.75rem;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &.new {
+    background: $danger-color;
+  }
+}
+
+.course-content {
+  padding: map-get($spacers, 5);
+  
+  @include media-breakpoint-down(sm) {
+    padding: map-get($spacers, 4);
+  }
+  
+  @include media-breakpoint-down(xs) {
+    padding: map-get($spacers, 3);
+  }
+  
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $dark-color;
+    margin-bottom: map-get($spacers, 3);
+    letter-spacing: -0.01em;
+    line-height: $line-height-sm;
+  }
+  
+  p {
+    color: $gray-medium;
+    margin-bottom: map-get($spacers, 5);
+    line-height: $line-height-base;
+    
+    @include media-breakpoint-down(sm) {
+      margin-bottom: map-get($spacers, 4);
+    }
+  }
+}
+
+.course-btn {
+  @include button-variant($secondary-color);
+  width: 100%;
+  padding: map-get($spacers, 3) map-get($spacers, 4);
+  border-radius: $border-radius;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    background: $success-color;
+  }
+}
+
+// Add Course Card
+.add-course-card {
+  @include card();
+  @include flex-center();
+  min-height: 320px;
+  border: 2px dashed $gray-lighter;
+  background: $white;
+  cursor: pointer;
+  transition: all $transition-base;
+  
+  &:hover {
+    border-color: $primary-color;
+    background: lighten($primary-color, 45%);
+    transform: translateY(-5px);
+    
+    @include media-breakpoint-down(sm) {
+      transform: none;
+    }
+    
+    .add-course-content i {
+      color: $primary-color;
+      transform: scale(1.1);
+    }
+  }
+  
+  &:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+  
+  @include media-breakpoint-down(sm) {
+    min-height: 280px;
+  }
+}
+
+.add-course-content {
+  text-align: center;
+  color: $gray-medium;
+  
+  i {
+    font-size: 3rem;
+    margin-bottom: map-get($spacers, 4);
+    color: $gray-lighter;
+    transition: all $transition-base;
+  }
+  
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-sm;
+    margin-bottom: 0;
+  }
+}
+
+// Course Card Loading State
+.course-card.loading {
+  .course-image,
+  .course-content h3,
+  .course-content p {
+    @include loading-shimmer();
+  }
+  
+  .course-image {
+    background: $gray-lightest;
+  }
+  
+  .course-content h3 {
+    height: 1.5rem;
+    border-radius: $border-radius-sm;
+    margin-bottom: map-get($spacers, 3);
+  }
+  
+  .course-content p {
+    height: 1rem;
+    border-radius: $border-radius-sm;
+    margin-bottom: map-get($spacers, 2);
+    
+    &:last-of-type {
+      width: 70%;
+    }
+  }
+  
+  .course-btn {
+    background: $gray-lighter;
+    color: transparent;
+    cursor: not-allowed;
+  }
+}
