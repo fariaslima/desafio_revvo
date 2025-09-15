@@ -92,7 +92,7 @@ class CourseController
                 'title' => $_POST['title'] ?? '',
                 'description' => $_POST['description'] ?? '',
                 'image' => $imageFilename,
-                'category' => $_POST['category'] ?? '',
+                'link' => $_POST['link'] ?? '',
             ];
 
             $course = $this->courseService->createCourse($data);
@@ -123,8 +123,8 @@ class CourseController
             if (isset($_POST['description']) && $_POST['description'] !== '') {
                 $data['description'] = $_POST['description'];
             }
-            if (isset($_POST['category']) && $_POST['category'] !== '') {
-                $data['category'] = $_POST['category'];
+            if (isset($_POST['link']) && $_POST['link'] !== '') {
+                $data['link'] = $_POST['link'];
             }
             if ($imageFilename !== null) {
                 $data['image'] = $imageFilename;

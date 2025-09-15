@@ -141,7 +141,7 @@ class LEOPlatform {
             form.courseId.value = course.id;
             form.title.value = course.title;
             form.description.value = course.description;
-            form.category.value = course.category || '';
+            form.link.value = course.link || '';
         } else {
             modal.querySelector('#modal-title').textContent = 'Adicionar Curso';
             form.courseId.value = '';
@@ -170,9 +170,9 @@ class LEOPlatform {
                     <button type="button" class="modal-close" aria-label="Fechar modal">&times;</button>
                 </header>
                 <div class="course-view">
-                    <img src="${course.image || 'https://placehold.co/300x200?text=Curso'}" alt="${course.title}" style="width: 100%; max-width: 300px; height: auto; margin-bottom: 1rem;" />
+                    <img src="${course.image ? '/image/' + course.image : 'https://placehold.co/300x200?text='+course.title}" alt="${course.title}" style="width: 100%; max-width: 300px; height: auto; margin-bottom: 1rem;" />
                     <p><strong>Descrição:</strong> ${course.description}</p>
-                    ${course.category ? `<p><strong>Categoria:</strong> ${course.category}</p>` : ''}
+                    ${course.link ? `<p><strong>Categoria:</strong> ${course.link}</p>` : ''}
                 </div>
             </div>
         `;

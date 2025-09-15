@@ -26,12 +26,12 @@ class CourseRepository
 
     public function create(array $data): Course
     {
-        $stmt = $this->pdo->prepare("INSERT INTO courses (title, description, image, category) VALUES (?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO courses (title, description, image, link) VALUES (?, ?, ?, ?)");
         $stmt->execute([
             $data['title'],
             $data['description'],
             $data['image'] ?? null,
-            $data['category'],
+            $data['link'],
         ]);
         $data['id'] = $this->pdo->lastInsertId();
         $data['created_at'] = date('Y-m-d H:i:s');

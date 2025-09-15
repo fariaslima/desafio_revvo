@@ -6,7 +6,7 @@ class Course
     public string $title;
     public string $description;
     public ?string $image;
-    public string $category;
+    public string $link;
     public string $created_at;
 
     public function __construct(array $data = [])
@@ -15,7 +15,7 @@ class Course
         $this->title = $data['title'] ?? '';
         $this->description = $data['description'] ?? '';
         $this->image = $data['image'] ?? null;
-        $this->category = $data['category'] ?? '';
+        $this->link = $data['link'] ?? '';
         $this->created_at = $data['created_at'] ?? '';
     }
 
@@ -26,7 +26,7 @@ class Course
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->image,
-            'category' => $this->category,
+            'link' => $this->link,
             'created_at' => $this->created_at,
         ];
     }

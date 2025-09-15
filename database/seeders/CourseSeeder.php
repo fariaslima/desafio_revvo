@@ -6,32 +6,38 @@ $pdo = getPDO();
 
 $courses = [
     [
-        'title' => 'Curso de PHP Básico',
+        'title' => 'Curso de Introdução ao PHP',
         'description' => 'Aprenda os fundamentos do PHP para desenvolvimento web.',
-        'image' => 'php-basico.jpg',
-        'category' => 'Programação',
+        'image' => 'curso_introducao-ao-php_2171.png',
+        'link' => 'https://google.com',
     ],
     [
-        'title' => 'JavaScript para Iniciantes',
-        'description' => 'Introdução ao JavaScript e desenvolvimento front-end.',
-        'image' => 'javascript-iniciantes.jpg',
-        'category' => 'Programação',
+        'title' => '.NET Framework',
+        'description' => 'Curso de introdução ao .NET Framework para desenvolvimento de aplicações.',
+        'image' => 'indtroducao-ao-net.jpg',
+        'link' => 'https://google.com',
     ],
     [
-        'title' => 'Design Responsivo',
-        'description' => 'Aprenda a criar layouts responsivos para dispositivos móveis.',
-        'image' => 'design-responsivo.jpg',
-        'category' => 'Design',
+        'title' => 'Inteligência Emocional',
+        'description' => 'Entenda o que é inteligência emocional e como aplicá-la no dia a dia.',
+        'image' => 'Inteligencia-Emocional.jpg',
+        'link' => 'https://google.com',
+    ],
+    [
+        'title' => 'Como ser um Chef',
+        'description' => 'Como se tornar um chef de cozinha e dominar a arte culinária.',
+        'image' => 'como-ser-um-chef-de-cozinha-1024x706.jpg',
+        'link' => 'https://google.com',
     ],
 ];
 
 foreach ($courses as $course) {
-    $stmt = $pdo->prepare("INSERT INTO courses (title, description, image, category) VALUES (:title, :description, :image, :category)");
+    $stmt = $pdo->prepare("INSERT INTO courses (title, description, image, link) VALUES (:title, :description, :image, :link)");
     $stmt->execute([
         ':title' => $course['title'],
         ':description' => $course['description'],
         ':image' => $course['image'],
-        ':category' => $course['category'],
+        ':link' => $course['link'],
     ]);
 }
 
