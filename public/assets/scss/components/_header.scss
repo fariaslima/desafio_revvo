@@ -1,5 +1,3 @@
-// ===== HEADER COMPONENT =====
-
 .header {
   background: $white;
   box-shadow: $shadow;
@@ -9,17 +7,12 @@
 }
 
 .header-content {
-  @include flex-between();
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
   padding: map-get($spacers, 4) 0;
-  gap: map-get($spacers, 5);
-  
-  @include media-breakpoint-down(md) {
-    flex-wrap: wrap;
-    gap: map-get($spacers, 4);
-  }
 }
 
-// Logo
 .logo {
   h1 {
     font-size: $font-size-3xl;
@@ -27,101 +20,110 @@
     color: $dark-color;
     letter-spacing: -0.02em;
     margin-bottom: 0;
-    
-    @include media-breakpoint-down(sm) {
-      font-size: $font-size-2xl;
-    }
   }
 }
 
-// Search Bar
-.search-bar {
-  flex: 1;
-  max-width: 400px;
+.right-section {
   display: flex;
-  position: relative;
-  
-  @include media-breakpoint-down(md) {
-    order: 3;
-    flex-basis: 100%;
-    max-width: none;
-  }
-  
-  input {
-    @include input-base();
-    padding-right: 3rem;
+  align-items: center;
+  gap: map-get($spacers, 5); 
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    max-width: 350px;
     
-    &:focus {
-      border-color: $primary-color;
+    margin-right: 1rem;
+
+    border-right: 1px solid $gray-lighter; 
+
+    input {
+      @include input-base();
+      padding-right: 3rem;
+      border: none;
+      background-color: transparent;
+      color: $dark-color;
+      font-size: $font-size-base;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      color: $gray-medium;
+      font-size: 1rem;
+      cursor: pointer;
+
+      &:hover {
+        color: $primary-color;
+      }
     }
   }
-  
-  button {
-    position: absolute;
-    right: map-get($spacers, 2);
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    color: $gray-medium;
-    padding: map-get($spacers, 2);
-    border-radius: 50%;
-    transition: color $transition-base;
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50px;
+    transition: background-color $transition-base;
+    position: relative;
+
+    padding-left: 1rem;
     
     &:hover {
-      color: $primary-color;
+      background-color: $gray-lightest;
     }
-    
+
     &:focus {
       outline: 2px solid $primary-color;
       outline-offset: 2px;
     }
-  }
-}
 
-// User Profile
-.user-profile {
-  @include flex-center();
-  gap: map-get($spacers, 3);
-  cursor: pointer;
-  padding: map-get($spacers, 2);
-  border-radius: $border-radius-xl;
-  transition: background-color $transition-base;
-  position: relative;
-  
-  &:hover {
-    background-color: $gray-lightest;
-  }
-  
-  &:focus {
-    outline: 2px solid $primary-color;
-    outline-offset: 2px;
-  }
-}
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
+    .user-info {
+      display: flex;
+      flex-direction: column; 
+      align-items: flex-start;
+      gap: 0.1rem; 
 
-.user-info {
-  @include flex-center();
-  gap: map-get($spacers, 2);
-  
-  @include media-breakpoint-down(sm) {
-    .user-name {
-      display: none;
+      .welcome-text {
+        font-size: 0.8rem; 
+        color: $gray-medium;
+        margin-bottom: 0;
+      }
+
+      .user-name {
+        font-weight: $font-weight-medium;
+        color: $dark-color;
+        margin-bottom: 0;
+      }
+    }
+
+    i {
+      font-size: 1rem;
+      margin-left: 0.5rem; 
+      color: $gray-medium;
     }
   }
 }
 
-.user-name {
-  font-weight: $font-weight-medium;
-  color: $dark-color;
-}
-
-// User Dropdown (Dynamic)
 .user-dropdown {
   position: absolute;
   top: 100%;
