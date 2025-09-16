@@ -26,12 +26,12 @@ class LEOPlatform {
                 modal.style.display = 'flex';
                 modal.querySelector('.modal-close').addEventListener('click', () => {
                     modal.style.display = 'none';
-                    localStorage.setItem('hasVisited', 'false');
+                    localStorage.setItem('hasVisited', 'true');
                 });
 
                 modal.querySelector('.cta-button').addEventListener('click', () => {
                     modal.style.display = 'none';
-                    localStorage.setItem('hasVisited', 'false');
+                    localStorage.setItem('hasVisited', 'true');
                 });
             }
         }
