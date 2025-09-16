@@ -8,6 +8,7 @@ class LEOPlatform {
         }
 
         this.init();
+        this.showModalOnFirstVisit();
     }
 
     async init() {
@@ -16,6 +17,24 @@ class LEOPlatform {
         await this.fetchCourses();
         this.initCourseCards();
         this.initAccessibility();
+    }
+
+    showModalOnFirstVisit() {
+        if (!localStorage.getItem('hasVisited')) {
+            const modal = document.getElementById('welcome-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.querySelector('.modal-close').addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    localStorage.setItem('hasVisited', 'false');
+                });
+
+                modal.querySelector('.cta-button').addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    localStorage.setItem('hasVisited', 'false');
+                });
+            }
+        }
     }
 
     async fetchCourses() {

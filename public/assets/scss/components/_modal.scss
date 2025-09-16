@@ -1,0 +1,100 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-index-modal;
+}
+
+.modal-content-home {
+  background: $white;
+  padding: 0;
+  border-radius: $border-radius-sm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: $shadow-lg;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: map-get($spacers, 8);
+
+  .modal-close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: $white;
+    border: none;
+    color: $dark-color;
+    font-size: 1.5rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;  
+    
+    &:hover {
+      background-color: $gray-lightest;
+    }
+  }
+
+  .modal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    display: block;
+    object-fit: cover;
+    margin-bottom: 0;  
+  }
+
+  .modal-header {
+    text-align: center;
+    margin-top: $spacer;
+    margin-bottom: $spacer;
+
+    h2 {
+      font-size: $font-size-2xl;
+      color: $dark-color;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .modal-body {
+    text-align: center;
+    margin-bottom: $spacer;
+
+    padding-left: map-get($spacers, 8);
+    padding-right: map-get($spacers, 8);
+
+    p {
+      font-size: $font-size-base;
+      color: $gray-medium;
+      margin-bottom: $spacer;
+    }
+  }
+
+  .cta-button {
+    background-color: $primary-color;
+    color: $white;
+    padding: $spacer * 0.75 $spacer * 1.5;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: $font-size-base;
+    text-transform: uppercase;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}
