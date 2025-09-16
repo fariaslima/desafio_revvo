@@ -14,7 +14,13 @@ class HomeController
     public function index(): void
     {
         $user = $this->authService->getCurrentUser();
-        $courses = $this->courseService->getAllCourses();
+        $dbError = false;
+        try {
+            $courses = $this->courseService->getAllCourses();
+        } catch (PDOException $e) {
+            $dbError = true;
+            $courses = [];
+        }
 
         include __DIR__ . '/../Views/home.php';
     }

@@ -21,6 +21,11 @@
             <input type="email" id="email" name="email" placeholder="Email" required>
             <label for="password">Senha</label>
             <input type="password" id="password" name="password" placeholder="Senha" required>
+
+            <label for="is_admin">
+                <input type="checkbox" id="is_admin" name="is_admin" value="1"> Administrador
+            </label>
+
             <button type="submit" class="course-btn">Cadastrar</button>
             <p><a href="/login">Já tem conta? Faça login</a></p>
         </form>

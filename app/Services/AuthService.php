@@ -9,7 +9,7 @@ class AuthService
         $this->userRepository = $userRepository;
     }
 
-    public function register(string $name, string $email, string $password): User
+    public function register(string $name, string $email, string $password, bool $is_admin = false): User
     {
         if ($this->userRepository->findByEmail($email)) {
             throw new Exception('Email already exists');
@@ -19,6 +19,7 @@ class AuthService
             'name' => $name,
             'email' => $email,
             'password' => $hashedPassword,
+            'is_admin' => $is_admin,
         ]);
     }
 
@@ -54,13 +55,5 @@ class AuthService
     {
         $user = $this->getCurrentUser();
         return $user && $user->is_admin;
-    }
-
-    public function markModalShown(): void
-    {
-        $user = $this->getCurrentUser();
-        if ($user) {
-            $this->userRepository->updateModalShown($user->id, true);
-        }
     }
 }

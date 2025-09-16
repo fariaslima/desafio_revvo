@@ -27,22 +27,15 @@ class UserRepository
 
     public function create(array $data): User
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password, is_admin, modal_shown) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password, is_admin) VALUES (?, ?, ?, ?)");
         $stmt->execute([
             $data['name'],
             $data['email'],
             $data['password'],
             $data['is_admin'] ?? false,
-            $data['modal_shown'] ?? false,
         ]);
         $data['id'] = $this->pdo->lastInsertId();
         return new User($data);
-    }
-
-    public function updateModalShown(int $id, bool $shown): bool
-    {
-        $stmt = $this->pdo->prepare("UPDATE users SET modal_shown = ? WHERE id = ?");
-        return $stmt->execute([$shown, $id]);
     }
 
     public function update(int $id, array $data): bool

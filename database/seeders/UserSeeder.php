@@ -6,13 +6,13 @@ $pdo = getPDO();
 
 $users = [
     [
-        'name' => 'Admin User',
+        'name' => 'Admin',
         'email' => 'admin@example.com',
         'password' => password_hash('admin123', PASSWORD_DEFAULT),
         'is_admin' => 1,
     ],
     [
-        'name' => 'Regular User',
+        'name' => 'User',
         'email' => 'user@example.com',
         'password' => password_hash('user123', PASSWORD_DEFAULT),
         'is_admin' => 0,

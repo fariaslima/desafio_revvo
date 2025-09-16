@@ -51,9 +51,10 @@ class AuthController
         $name = $_POST['name'] ?? '';
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
+        $is_admin = isset($_POST['is_admin']) && $_POST['is_admin'] === '1' ? true : false;
 
         try {
-            $this->authService->register($name, $email, $password);
+            $this->authService->register($name, $email, $password, $is_admin);
             header('Location: /login');
             exit;
         } catch (Exception $e) {
