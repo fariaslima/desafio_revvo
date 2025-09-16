@@ -1,7 +1,9 @@
 # Leo - Aprendizado descomplicado, do seu jeito!
 
 ## Descrição do Projeto
-Leo é uma plataforma de cursos online que permite criar, gerenciar e participar de cursos de forma simples e intuitiva.## Funcionalidades do Projeto
+Leo é uma plataforma de cursos online que permite criar, gerenciar e participar de cursos de forma simples e intuitiva.
+
+## Funcionalidades do Projeto
 - **Cadastro e login de usuários** (alunos e administradores)
 - **Criação, edição e exclusão de cursos**
 - **Upload de imagens para os cursos**
